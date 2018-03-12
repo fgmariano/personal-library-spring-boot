@@ -28,8 +28,10 @@ public class LibraryController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap modelMap, HttpSession session) {
 		if(session.getAttribute("user") != null) {
+			User user = (User) session.getAttribute("user");
 			modelMap.put("book", new Book());
 			modelMap.put("books", bookService.findAll());
+			modelMap.put("user_books", user.getBooks());
 			modelMap.put("function", "new");
 			return "library/index";
 		} else {

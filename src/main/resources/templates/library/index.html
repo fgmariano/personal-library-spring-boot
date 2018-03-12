@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
 <head>
-<meta charset="UTF-8"/>
-<title>Insert title here</title>
+	<meta charset="UTF-8"/>
+	<title>Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/style.css" />
 </head>
 <body>
-	<h3>Add new book</h3>
-	<form th:action="@{/book/} + ${function}" th:object="${book}" method="post">
-		<span th:text="${error}"></span>
-		<table cellpadding="2" cellspacing="2">
-			<tr>
-				<td>Title</td>
-				<td><input type="text" th:field="*{title}" /></td>
-			</tr>
-			<tr>
-				<td>Author</td>
-				<td><input type="text" th:field="*{author}" /></td>
-			</tr>
-			<tr>
-				<td>Genre</td>
-				<td><input type="text" th:field="*{genre}" /></td>
-			</tr>
-			<tr>
-				<td>Pages</td>
-				<td><input type="text" th:field="*{pages}" /></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td><input type="submit" value="Save" /></td>
-			</tr>
-		</table>
-	</form>
-	<h3>Books</h3>
-	<span th:text="${error}"></span>
-	<table cellpadding="2" cellspacing="2">
-		<th:block th:each="book: 	${books}">
-			<tr>
-				<td th:text="${book.title}">...</td>
-				<td th:text="${book.author}">...</td>
-				<td><a th:href="@{'/book/add/' + ${book.id}}">Add</a></td>
-				<td><a th:href="@{'/book/edit/' + ${book.id}}">Edit</a></td>
-				<td><a th:href="@{'/book/del/' + ${book.id}}">Delete</a></td>
-			</tr>
-		</th:block>
-	</table>
+	<div class="container">
+		<div class="jumbotron">
+			<h3>New book</h3>
+			<form th:action="@{/book/} + ${function}" th:object="${book}" method="post">
+				<span th:text="${error}"></span>
+				<div class="form-group">
+					<label for="title">Title</label>
+					<input class="form-control" type="text" name="title" th:field="*{title}"/>
+				</div>
+				<div class="form-group">
+					<label for="author">Author</label>
+					<input class="form-control" type="text" name="author" th:field="*{author}"/>
+				</div>
+				<div class="form-group">
+					<label for="genre">Genre</label>
+					<input class="form-control" type="text" name="genre" th:field="*{genre}"/>
+				</div>
+				<div class="form-group">
+					<label for="pages">Pages</label>
+					<input class="form-control" type="text" name="pages" th:field="*{pages}"/>
+				</div>
+				<input class="btn btn-primary" type="submit" value="Save"/>
+			</form>	
+		</div>
+
+		<div class="row">
+			<div class="floatLeft">
+				<h3>Your personal library</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Title</th>
+							<th scope="col">Author</th>
+							<th scope="col">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="book:	${user_books}">
+							<tr>
+								<td th:text="${book.title}">...</td>
+								<td th:text="${book.author}">...</td>
+								<td>
+									<a class="btn btn-danger" th:href="@{'/book/del/' + ${book.id}}">Remove</a>
+								</td>
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+			</div>
+			<div class="floatRight">
+				<h3>Available books</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Title</th>
+							<th scope="col">Author</th>
+							<th scope="col">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="book:	${books}">
+							<tr>
+								<td th:text="${book.title}">...</td>
+								<td th:text="${book.author}">...</td>
+								<td>
+									<a class="btn btn-info" th:href="@{'/book/add/' + ${book.id}}">Add</a>
+									<a class="btn btn-info" th:href="@{'/book/edit/' + ${book.id}}">Edit</a>
+									<a class="btn btn-danger" th:href="@{'/book/del/' + ${book.id}}">Delete</a>
+								</td>
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 	
+	<script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 </body>
 </html>
