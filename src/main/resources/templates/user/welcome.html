@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	Welcome <span th:text="${session.user.username}"></span>
+	<table>
+		<tr><td><span th:text="${session.user.id}"></span></td></tr>
+		<tr><td><span th:text="${session.user.username}"></span></td></tr>
+		<tr><td><span th:text="${session.user.email}"></span></td></tr>
+		<tr><td><span th:text="${session.user.password}"></span></td></tr>
+	</table>
+	<br/>
+	<a th:href="@{/user/logout}">Logout</a>
+</body>
+</html>
