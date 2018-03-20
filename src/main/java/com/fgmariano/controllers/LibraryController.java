@@ -70,6 +70,7 @@ public class LibraryController {
 	
 	@RequestMapping(value = "book/edit", method = RequestMethod.POST)
 	public String editBook(@ModelAttribute("book") Book book) {
+		System.out.println(book.toString());
 		bookService.updateBook(book);
 		return "redirect:/";
 	}
@@ -90,4 +91,9 @@ public class LibraryController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		return "redirect:/user";
+	}
 }

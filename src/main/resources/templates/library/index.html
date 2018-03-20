@@ -12,6 +12,7 @@
 			<h3>New book</h3>
 			<form th:action="@{/book/} + ${function}" th:object="${book}" method="post">
 				<span th:text="${error}"></span>
+				<input type="hidden" th:field="*{id}" />
 				<div class="form-group">
 					<label for="title">Title</label>
 					<input class="form-control" type="text" name="title" th:field="*{title}"/>

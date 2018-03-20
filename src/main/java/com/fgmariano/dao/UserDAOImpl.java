@@ -66,6 +66,8 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			session.close();
 		}
+		System.out.println("Pwd from db: " + user.getPassword());
+		System.out.println("Pwd from login hash: " + hashPassword(password));
 		if(user != null && checkPassword(password, user.getPassword())) {
 			return user;
 		} else {
